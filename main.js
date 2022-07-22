@@ -1,13 +1,10 @@
-const choices = ['Rock','Paper','Scissors'];
+const computerChoices = ['Rock','Paper','Scissors'];
 let playerScore = 0;
 let computerScore = 0;
 
 function getComputerChoice() {
-    return choices[Math.floor(Math.random() * 3)].toLowerCase();
+    return computerChoices[Math.floor(Math.random() * 3)].toLowerCase();
 }
-
-// const yourSelection = 'RoCk'.toLowerCase();
-// const playerSelection = prompt("What's your choice?").toLowerCase();
 
 function playRound(playerSelection,computerSelection) {
     if(playerSelection === 'rock' && computerSelection === 'scissors') {
@@ -40,7 +37,7 @@ function game() {
     let rounds = 5;
 
     while(rounds > 0) {
-        const playerSelection = prompt("What's your choice?").toLowerCase();
+        const playerSelection = prompt("Please enter Rock, Paper or Scissors:").toLowerCase();
 
         
         playRound(playerSelection,getComputerChoice());
@@ -50,19 +47,18 @@ function game() {
         if(result.indexOf('Win') !== -1) {
             playerScore += 1;
             computerScore;
-            console.log({playerScore,computerScore});
 
         } else if(result.indexOf('Lose') !== -1) {
             computerScore += 1;
             playerScore;
-            console.log({playerScore,computerScore});
 
         } else if(result.indexOf('Tie') !== -1){
            playerScore += 0;
            computerScore += 0;
-           console.log({playerScore,computerScore});
-
         }
+
+        console.log({playerScore,computerScore});
+        console.log(result);
         rounds--;
     }
 
@@ -74,11 +70,11 @@ game();
 
 function announceWinner() {
     if(playerScore > computerScore) {
-        console.log("You're the winner!");
+        console.log("You're the winner!" + {yourScore: playerScore, computerScore});
     } else if(playerScore < computerScore) {
-        console.log('You Lost!');
+        console.log('You Lost!' + {yourScore: playerScore, computerScore});
     } else if(playerScore === computerScore) {
-        console.log('You tie!');
+        console.log('You tie!' + {yourScore: playerScore, computerScore});
         
     }
     
