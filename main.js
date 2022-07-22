@@ -8,7 +8,7 @@ function getComputerChoice() {
 
 
 
-const yourSelection = 'RoCk'.toLowerCase();
+// const yourSelection = 'RoCk'.toLowerCase();
 // const playerSelection = prompt("What's your choice?").toLowerCase();
 
 function playRound(playerSelection,computerSelection) {
@@ -42,28 +42,28 @@ function game() {
     let rounds = 5;
 
     while(rounds > 0) {
-        playRound(yourSelection,getComputerChoice());
+        const playerSelection = prompt("What's your choice?").toLowerCase();
 
-        if(playRound(yourSelection,getComputerChoice()).indexOf('Win') !== -1) {
-            playerScore += 1
-            // console.log(playerScore);
-            // console.log('You win');
-        } else if(playRound(yourSelection,getComputerChoice()).indexOf('Lose') !== -1) {
-            computerScore += 1
-            // console.log(computerScore);
-            // console.log('You Lose');
-        } else if(playRound(yourSelection,getComputerChoice()).indexOf('Tie') !== -1){
-            // console.log('You Tie');
-            // playerScore += 0;
-            // computerScore += 0;
-            playRound(yourSelection,getComputerChoice());
-            const val = playRound(yourSelection,getComputerChoice());
-            if(val.indexOf('Win') !== -1) {
-                playerScore += 1;
-            } else if(val.indexOf('Lose') !== -1) {
-                computerScore += 1;
-            }
-            
+        
+        playRound(playerSelection,getComputerChoice());
+
+        const result = playRound(playerSelection,getComputerChoice());
+
+        if(result.indexOf('Win') !== -1) {
+            playerScore += 1;
+            computerScore;
+            console.log(playerScore,computerScore);
+
+        } else if(result.indexOf('Lose') !== -1) {
+            computerScore += 1;
+            playerScore;
+            console.log(playerScore,computerScore);
+
+        } else if(result.indexOf('Tie') !== -1){
+           playerScore += 0;
+           computerScore += 0;
+           console.log(playerScore,computerScore);
+
         }
         rounds--;
     }
@@ -74,12 +74,9 @@ function game() {
         console.log('You Lost!');
     } else if(playerScore === computerScore) {
         console.log('You tie!');
-        console.log(playRound(yourSelection,getComputerChoice()));
+        // console.log(playRound(yourSelection,getComputerChoice()));
         
     }
-
-    console.log(playerScore,computerScore);
-
 }
 
 game();
