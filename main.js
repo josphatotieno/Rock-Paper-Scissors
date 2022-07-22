@@ -6,8 +6,6 @@ function getComputerChoice() {
     return choices[Math.floor(Math.random() * 3)].toLowerCase();
 }
 
-
-
 // const yourSelection = 'RoCk'.toLowerCase();
 // const playerSelection = prompt("What's your choice?").toLowerCase();
 
@@ -52,32 +50,37 @@ function game() {
         if(result.indexOf('Win') !== -1) {
             playerScore += 1;
             computerScore;
-            console.log(playerScore,computerScore);
+            console.log({playerScore,computerScore});
 
         } else if(result.indexOf('Lose') !== -1) {
             computerScore += 1;
             playerScore;
-            console.log(playerScore,computerScore);
+            console.log({playerScore,computerScore});
 
         } else if(result.indexOf('Tie') !== -1){
            playerScore += 0;
            computerScore += 0;
-           console.log(playerScore,computerScore);
+           console.log({playerScore,computerScore});
 
         }
         rounds--;
     }
 
+
+    announceWinner();
+}
+
+game();
+
+function announceWinner() {
     if(playerScore > computerScore) {
         console.log("You're the winner!");
     } else if(playerScore < computerScore) {
         console.log('You Lost!');
     } else if(playerScore === computerScore) {
         console.log('You tie!');
-        // console.log(playRound(yourSelection,getComputerChoice()));
         
     }
+    
 }
-
-game();
 
