@@ -1,3 +1,6 @@
+
+
+
 const choices = ['Rock','Paper','Scissors'];
 let playerScore = 0;
 let computerScore = 0;
@@ -9,9 +12,10 @@ function getComputerChoice() {
 
 
 function playRound(playerSelection,computerSelection) {
+
     if(playerSelection === 'rock' && computerSelection === 'scissors') {
         return 'You Won! Rock beats scissors';
-        
+
     } else if(playerSelection === 'rock' && computerSelection === 'paper') {
         return 'You Lose! Paper beats Rock';
         
@@ -86,15 +90,39 @@ function game() {
 
     btns.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            const playerSelection = e.target.textContent.toLowerCase();
-            // console.log(playerSelection);
-            console.log(playRound(playerSelection,getComputerChoice()));
+            const playerSelection = e.target.textContent. toLowerCase();
+            
+            playRound(playerSelection,getComputerChoice());
+
+            const result = playRound(playerSelection,getComputerChoice());
+
+            document.querySelector('#results').textContent = result;
+
+            if(result.indexOf('Won') !== -1) {
+                playerScore += 1;
+                computerScore;
+                console.log({playerScore,computerScore});
+
+            } else if(result.indexOf('Lose') !== -1) {
+                computerScore += 1;
+                playerScore;
+                console.log({playerScore,computerScore});
+
+            } else if(result.indexOf('Tied') !== -1){
+                playerScore += 0;
+                computerScore += 0;
+                console.log({playerScore,computerScore});
+
+            }
+
+            document.querySelector('#your-score').textContent = playerScore;
+            document.querySelector('#computer-score').textContent = computerScore;
             
         })    
     })
 
 
-    announceWinner();
+    // announceWinner();
 }
 
 game();
@@ -110,6 +138,16 @@ function announceWinner() {
     }
     
 }
+
+
+document.querySelector('#reset-btn').addEventListener('click', () => {
+    document.querySelector('#your-score').textContent = 0;
+    document.querySelector('#computer-score').textContent = 0;
+    window.location.reload()
+})
+
+
+
 
 
 
