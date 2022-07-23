@@ -101,41 +101,51 @@ function game() {
             if(result.indexOf('Won') !== -1) {
                 playerScore += 1;
                 computerScore;
-                console.log({playerScore,computerScore});
+                // console.log({playerScore,computerScore});
 
             } else if(result.indexOf('Lose') !== -1) {
                 computerScore += 1;
                 playerScore;
-                console.log({playerScore,computerScore});
+                // console.log({playerScore,computerScore});
 
             } else if(result.indexOf('Tied') !== -1){
                 playerScore += 0;
                 computerScore += 0;
-                console.log({playerScore,computerScore});
+                // console.log({playerScore,computerScore});
 
             }
 
             document.querySelector('#your-score').textContent = playerScore;
             document.querySelector('#computer-score').textContent = computerScore;
+
+            announceWinner(playerScore,computerScore);
             
         })    
     })
 
 
-    // announceWinner();
+    
 }
 
 game();
 
-function announceWinner() {
-    if(playerScore > computerScore) {
-        console.log("You're the winner!");
-    } else if(playerScore < computerScore) {
-        console.log('You Lost!');
-    } else if(playerScore === computerScore) {
-        console.log('You Tied!');
-        
+function announceWinner(playerScore,computerScore) {
+    console.log({playerScore,computerScore});
+
+    if(playerScore === 5) {
+        console.log('player winner');
+    } else if(computerScore === 5) {
+        console.log('comp winner');
     }
+    
+    // if(playerScore > computerScore) {
+    //     console.log("You're the winner!");
+    // } else if(playerScore < computerScore) {
+    //     console.log('You Lost!');
+    // } else if(playerScore === computerScore) {
+    //     console.log('You Tied!');
+        
+    // }
     
 }
 
