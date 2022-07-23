@@ -133,13 +133,15 @@ function announceWinner(playerScore,computerScore) {
     console.log({playerScore,computerScore});
 
     if(playerScore === 5) {
-        console.log('Game Over! You\'re the  Winner');
+        document.querySelector('#results').textContent = 'Game Over! You Won';
+
         document.querySelectorAll('.btn').forEach(btn => {
             btn.disabled = true;
         })
 
     } else if(computerScore === 5) {
-        console.log('Game Over! You Lost');
+        document.querySelector('#results').textContent = 'Game Over! You Lost';
+
         document.querySelectorAll('.btn').forEach(btn => {
             btn.disabled = true;
         })
