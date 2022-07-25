@@ -1,11 +1,9 @@
-
-
-
-const choices = ['Rock','Paper','Scissors'];
 let playerScore = 0;
 let computerScore = 0;
 
 function getComputerChoice() {
+    const choices = ['Rock','Paper','Scissors'];
+
     return choices[Math.floor(Math.random() * 3)].toLowerCase();
 }
 
@@ -101,17 +99,14 @@ function game() {
             if(result.indexOf('Won') !== -1) {
                 playerScore += 1;
                 computerScore;
-                // console.log({playerScore,computerScore});
 
             } else if(result.indexOf('Lose') !== -1) {
                 computerScore += 1;
                 playerScore;
-                // console.log({playerScore,computerScore});
 
             } else if(result.indexOf('Tied') !== -1){
                 playerScore += 0;
                 computerScore += 0;
-                // console.log({playerScore,computerScore});
 
             }
 
@@ -122,9 +117,6 @@ function game() {
             
         })    
     })
-
-
-    
 }
 
 game();
@@ -132,20 +124,15 @@ game();
 function announceWinner(playerScore,computerScore) {
     console.log({playerScore,computerScore});
 
-    if(playerScore === 5) {
+    if(playerScore === 5 || computerScore === 5) {
         document.querySelector('#results').textContent = 'Game Over! You Won';
 
         document.querySelectorAll('.btn').forEach(btn => {
             btn.disabled = true;
         })
 
-    } else if(computerScore === 5) {
-        document.querySelector('#results').textContent = 'Game Over! You Lost';
-
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.disabled = true;
-        })
     }
+
     
     // if(playerScore > computerScore) {
     //     console.log("You're the winner!");
@@ -162,6 +149,7 @@ function announceWinner(playerScore,computerScore) {
 document.querySelector('#reset-btn').addEventListener('click', () => {
     document.querySelector('#your-score').textContent = 0;
     document.querySelector('#computer-score').textContent = 0;
+
     window.location.reload()
 })
 
