@@ -1,15 +1,18 @@
-const computerChoices = ['Rock','Paper','Scissors'];
 let playerScore = 0;
 let computerScore = 0;
 
 function getComputerChoice() {
-    return computerChoices[Math.floor(Math.random() * 3)].toLowerCase();
+    const choices = ['Rock','Paper','Scissors'];
+
+    return choices[Math.floor(Math.random() * 3)].toLowerCase();
 }
 
+
 function playRound(playerSelection,computerSelection) {
+
     if(playerSelection === 'rock' && computerSelection === 'scissors') {
-        return 'You Win! Rock beats scissors';
-        
+        return 'You Won! Rock beats scissors';
+
     } else if(playerSelection === 'rock' && computerSelection === 'paper') {
         return 'You Lose! Paper beats Rock';
         
@@ -17,16 +20,16 @@ function playRound(playerSelection,computerSelection) {
         return 'You Lose! Scissors beats Paper'
 
     } else if(playerSelection === 'paper' && computerSelection === 'rock') {
-        return 'You Win! Paper beats Rock'
+        return 'You Won! Paper beats Rock'
 
     } else if(playerSelection === 'scissors' && computerSelection === 'paper') {
-        return 'You Win! Scissors beats Paper'
+        return 'You Won! Scissors beats Paper'
 
     } else if(playerSelection === 'scissors' && computerSelection === 'rock') {
         return 'You Lose! Rock beats Scissors'
 
     } else if(playerSelection === computerSelection) {
-        return 'You Tie! Play again';
+        return 'You Tied! Play again';
         
     }
     
@@ -34,49 +37,132 @@ function playRound(playerSelection,computerSelection) {
 
 function game() {
 
-    let rounds = 5;
+    // let rounds = 5;
 
-    while(rounds > 0) {
-        const playerSelection = prompt("Please enter Rock, Paper or Scissors:").toLowerCase();
+    // while(rounds > 0) {
+    //     const playerSelection = prompt("What's your choice?").toLowerCase();
 
         
-        playRound(playerSelection,getComputerChoice());
+    //     playRound(playerSelection,getComputerChoice());
 
-        const result = playRound(playerSelection,getComputerChoice());
+    //     const result = playRound(playerSelection,getComputerChoice());
 
-        if(result.indexOf('Win') !== -1) {
-            playerScore += 1;
-            computerScore;
+    //     if(result.indexOf('Win') !== -1) {
+    //         playerScore += 1;
+    //         computerScore;
+    //         console.log({playerScore,computerScore});
 
-        } else if(result.indexOf('Lose') !== -1) {
-            computerScore += 1;
-            playerScore;
+    //     } else if(result.indexOf('Lose') !== -1) {
+    //         computerScore += 1;
+    //         playerScore;
+    //         console.log({playerScore,computerScore});
 
-        } else if(result.indexOf('Tie') !== -1){
-           playerScore += 0;
-           computerScore += 0;
-        }
+    //     } else if(result.indexOf('Tie') !== -1){
+    //        playerScore += 0;
+    //        computerScore += 0;
+    //        console.log({playerScore,computerScore});
 
-        console.log({playerScore,computerScore});
-        console.log(result);
-        rounds--;
-    }
+    //     }
+    //     rounds--;
+    // }
+
+    const btnWrapper = document.querySelector('#btn-wrapper');
 
 
-    announceWinner();
+    const div1 = document.createElement('button');
+    div1.textContent = 'Rock';
+    div1.className = 'btn';
+
+    const div2 = document.createElement('button');
+    div2.textContent = 'Paper';
+    div2.className = 'btn';
+
+    const div3 = document.createElement('button');
+    div3.textContent = 'Scissors';
+    div3.className = 'btn';
+
+    btnWrapper.append(div1,div2,div3);
+
+    const btns = document.querySelectorAll('.btn');
+
+    btns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const playerSelection = e.target.textContent. toLowerCase();
+            
+            playRound(playerSelection,getComputerChoice());
+
+            const result = playRound(playerSelection,getComputerChoice());
+
+            document.querySelector('#results').textContent = result;
+
+            if(result.indexOf('Won') !== -1) {
+                playerScore += 1;
+                computerScore;
+
+            } else if(result.indexOf('Lose') !== -1) {
+                computerScore += 1;
+                playerScore;
+
+            } else if(result.indexOf('Tied') !== -1){
+                playerScore += 0;
+                computerScore += 0;
+
+            }
+
+            document.querySelector('#your-score').textContent = playerScore;
+            document.querySelector('#computer-score').textContent = computerScore;
+
+            announceWinner(playerScore,computerScore);
+            
+        })    
+    })
 }
 
 game();
 
-function announceWinner() {
-    if(playerScore > computerScore) {
-        console.log("You're the winner!" + {yourScore: playerScore, computerScore});
-    } else if(playerScore < computerScore) {
-        console.log('You Lost!' + {yourScore: playerScore, computerScore});
-    } else if(playerScore === computerScore) {
-        console.log('You tie!' + {yourScore: playerScore, computerScore});
+function announceWinner(playerScore,computerScore) {
+    console.log({playerScore,computerScore});
+
+    if(playerScore === 5) {
+        document.querySelector('#results').textContent = 'Game Over! You Won';
+        document.querySelector('#results').style.color = 'green'
         
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.disabled = true;
+        })
+
+    }else if(computerScore === 5) {
+        document.querySelector('#results').textContent = 'Game Over! You Lost';
+        document.querySelector('#results').style.color = 'red'
+        
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.disabled = true;
+        })
     }
+
+    
+    // if(playerScore > computerScore) {
+    //     console.log("You're the winner!");
+    // } else if(playerScore < computerScore) {
+    //     console.log('You Lost!');
+    // } else if(playerScore === computerScore) {
+    //     console.log('You Tied!');
+        
+    // }
     
 }
+
+
+document.querySelector('#reset-btn').addEventListener('click', () => {
+    document.querySelector('#your-score').textContent = 0;
+    document.querySelector('#computer-score').textContent = 0;
+
+    window.location.reload()
+})
+
+
+
+
+
+
 
