@@ -124,16 +124,21 @@ game();
 function announceWinner(playerScore,computerScore) {
     console.log({playerScore,computerScore});
 
-    if(playerScore === 5 || computerScore === 5) {
-        setTimeout(() => {
-            document.querySelector('#results').textContent = 'Game Over! You Won';
-
-        },1000)
+    if(playerScore === 5) {
+        document.querySelector('#results').textContent = 'Game Over! You Won';
+        document.querySelector('#results').style.color = 'green'
         
         document.querySelectorAll('.btn').forEach(btn => {
             btn.disabled = true;
         })
 
+    }else if(computerScore === 5) {
+        document.querySelector('#results').textContent = 'Game Over! You Lost';
+        document.querySelector('#results').style.color = 'red'
+        
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.disabled = true;
+        })
     }
 
     
