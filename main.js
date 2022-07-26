@@ -1,5 +1,6 @@
 let playerScore = 0;
 let computerScore = 0;
+let round = 0;
 
 function getComputerChoice() {
     const choices = ['Rock','Paper','Scissors'];
@@ -36,36 +37,6 @@ function playRound(playerSelection,computerSelection) {
 }
 
 function game() {
-
-    // let rounds = 5;
-
-    // while(rounds > 0) {
-    //     const playerSelection = prompt("What's your choice?").toLowerCase();
-
-        
-    //     playRound(playerSelection,getComputerChoice());
-
-    //     const result = playRound(playerSelection,getComputerChoice());
-
-    //     if(result.indexOf('Win') !== -1) {
-    //         playerScore += 1;
-    //         computerScore;
-    //         console.log({playerScore,computerScore});
-
-    //     } else if(result.indexOf('Lose') !== -1) {
-    //         computerScore += 1;
-    //         playerScore;
-    //         console.log({playerScore,computerScore});
-
-    //     } else if(result.indexOf('Tie') !== -1){
-    //        playerScore += 0;
-    //        computerScore += 0;
-    //        console.log({playerScore,computerScore});
-
-    //     }
-    //     rounds--;
-    // }
-
     const btnWrapper = document.querySelector('#btn-wrapper');
 
 
@@ -87,9 +58,7 @@ function game() {
 
     btns.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            const playerSelection = e.target.textContent. toLowerCase();
-            
-            playRound(playerSelection,getComputerChoice());
+            const playerSelection = e.target.textContent.toLowerCase();
 
             const result = playRound(playerSelection,getComputerChoice());
 
@@ -104,13 +73,16 @@ function game() {
                 playerScore;
 
             } else if(result.indexOf('Tied') !== -1){
-                playerScore += 0;
-                computerScore += 0;
+                playerScore;
+                computerScore;
 
             }
 
             document.querySelector('#your-score').textContent = playerScore;
             document.querySelector('#computer-score').textContent = computerScore;
+
+            round += 1;
+            document.querySelector('#round-count').textContent = round;
 
             announceWinner(playerScore,computerScore);
             
@@ -139,16 +111,6 @@ function announceWinner(playerScore,computerScore) {
             btn.disabled = true;
         })
     }
-
-    
-    // if(playerScore > computerScore) {
-    //     console.log("You're the winner!");
-    // } else if(playerScore < computerScore) {
-    //     console.log('You Lost!');
-    // } else if(playerScore === computerScore) {
-    //     console.log('You Tied!');
-        
-    // }
     
 }
 
